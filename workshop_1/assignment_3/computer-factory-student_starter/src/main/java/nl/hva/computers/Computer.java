@@ -19,6 +19,14 @@ public abstract class Computer {
 
     public Computer(ComputerComponentFactory factory) {
         computerComponentFactory = factory;
+
+        computerCase = computerComponentFactory.selectCase();
+        powerSupply = computerComponentFactory.selectPowerSupply();
+        motherBoard = computerComponentFactory.selectMotherBoard();
+        processor = computerComponentFactory.selectProcessor();
+        memory = computerComponentFactory.selectMemory();
+        storage = computerComponentFactory.selectStorage();
+        graphicsCard = computerComponentFactory.selectGraphicsCard();
     }
 
     public abstract void prepare();

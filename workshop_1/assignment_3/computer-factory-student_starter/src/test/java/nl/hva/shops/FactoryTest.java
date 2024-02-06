@@ -1,9 +1,6 @@
 package nl.hva.shops;
 
-import nl.hva.components.GraphicsCard;
-import nl.hva.components.Memory;
-import nl.hva.components.Storage;
-import nl.hva.components.StorageType;
+import nl.hva.components.*;
 import nl.hva.computers.Computer;
 import nl.hva.computers.ComputerTypes;
 import nl.hva.factories.ComputerComponentFactory;
