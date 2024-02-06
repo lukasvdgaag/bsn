@@ -1,8 +1,12 @@
 package nl.hva.observablestation;
 
+import nl.hva.sensors.Sensor;
+
+import java.util.List;
+
 public interface Observer {
 
-    void update(float temp, float humidity, float pressure);
+    void update(List<Sensor> sensors);
 
     String getName();
 

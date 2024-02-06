@@ -2,27 +2,27 @@ package nl.hva.observablestation;
 
 public class ObservableWSRunner {
 
-    public static void main (String args[]){
+    public static void main(String[] args) {
         ObservableWeatherStation observableWeatherStation = new ObservableWeatherStation();
-        print ("No Observers");
+        print("No Observers");
         observableWeatherStation.checkSensors();
-        print ("************");
+        print("************");
         WeatherDisplay livingRoomDisplay = new WeatherDisplay("Living Room");
         observableWeatherStation.registerObserver(livingRoomDisplay);
-        print ("One Observer");
+        print("One Observer");
         observableWeatherStation.checkSensors();
-        print ("************");
+        print("************");
         WeatherDisplay bedRoomDisplay = new WeatherDisplay("Bedroom");
         observableWeatherStation.registerObserver(bedRoomDisplay);
-        print ("Two Observers");
+        print("Two Observers");
         observableWeatherStation.checkSensors();
-        print ("************");
+        print("************");
         observableWeatherStation.removeObserver(livingRoomDisplay);
-        print ("One Observer");
+        print("One Observer");
         observableWeatherStation.checkSensors();
-
     }
-    private static void print (String message){
+
+    private static void print(String message) {
         System.out.println(message);
     }
 }

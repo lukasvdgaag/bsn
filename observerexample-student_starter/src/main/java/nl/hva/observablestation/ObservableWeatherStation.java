@@ -3,20 +3,26 @@ package nl.hva.observablestation;
 import nl.hva.sensors.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class ObservableWeatherStation implements Subject { //TODO implement interfaces as necessary
+public class ObservableWeatherStation implements Subject {
 
-    //TODO add a structure to hold the sensors, observers and the current weather
-    private ArrayList<Observer> observers;
-    private ArrayList<Sensor> sensors;
+    private final List<Observer> observers;
+    private final List<Sensor> sensors;
 
     public ObservableWeatherStation() {
         this.observers = new ArrayList<>();
         this.sensors = new ArrayList<>();
+
+        sensors.add(new RainGauge());
+        sensors.add(new Thermometer());
+        sensors.add(new Hygrometer());
+        sensors.add(new Anemometer());
     }
 
     public void checkSensors() {
-        //TODO get readings from sensors and format in a suitable way (see output of main)
+        sensors.forEach(Sensor::takeMeasurement);
+        this.notifyObservers();
     }
 
     public void registerObserver(Observer observer) {
@@ -33,8 +39,6 @@ public class ObservableWeatherStation implements Subject { //TODO implement inte
 
     @Override
     public void notifyObservers() {
-        for (Observer observer : observers) {
-            observer.update(0, 0, 0);
-        }
+        observers.forEach(observer -> observer.update(sensors));
     }
 }
