@@ -4,6 +4,6 @@ public class EightGBRam implements Memory {
 
     @Override
     public String getDetails() {
-        return null;
+        return "Eight GB Ram";
     }
 }

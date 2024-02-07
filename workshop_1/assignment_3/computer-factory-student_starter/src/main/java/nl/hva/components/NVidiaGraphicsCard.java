@@ -3,6 +3,6 @@ package nl.hva.components;
 public class NVidiaGraphicsCard implements GraphicsCard {
     @Override
     public String getDetails() {
-        return null;
+        return "NVidia Graphics Card";
     }
 }

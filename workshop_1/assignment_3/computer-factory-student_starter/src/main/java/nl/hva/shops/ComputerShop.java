@@ -1,9 +1,18 @@
 package nl.hva.shops;
 
 import nl.hva.computers.Computer;
+import nl.hva.computers.ComputerTypes;
 
 public abstract class ComputerShop {
-    protected abstract Computer buildComputer(String computerType);
+
+    protected Computer buildComputer(String computerType) {
+        if (computerType.equals(ComputerTypes.BASIC_COMPUTER)) {
+            return this.buildBasicComputer();
+        } else if (computerType.equals(ComputerTypes.GAMING_COMPUTER)) {
+            return this.buildGamingComputer();
+        }
+        return null;
+    }
 
     protected Computer prepareComputer(String computerType) {
         Computer computer = buildComputer(computerType);
@@ -15,5 +24,8 @@ public abstract class ComputerShop {
         return computer;
     }
 
+    protected abstract Computer buildBasicComputer();
+
+    protected abstract Computer buildGamingComputer();
 
 }

@@ -18,18 +18,19 @@ public abstract class Computer {
     PowerSupply powerSupply;
 
     public Computer(ComputerComponentFactory factory) {
-        computerComponentFactory = factory;
+        this.computerComponentFactory = factory;
+    }
+
+    public void prepare() {
+        System.out.println("Building " + name);
 
         computerCase = computerComponentFactory.selectCase();
         powerSupply = computerComponentFactory.selectPowerSupply();
-        motherBoard = computerComponentFactory.selectMotherBoard();
         processor = computerComponentFactory.selectProcessor();
+        motherBoard = computerComponentFactory.selectMotherBoard();
         memory = computerComponentFactory.selectMemory();
-        storage = computerComponentFactory.selectStorage();
         graphicsCard = computerComponentFactory.selectGraphicsCard();
     }
-
-    public abstract void prepare();
 
     public void burnInTest() {
         System.out.println("Running the computer for 60 minutes");

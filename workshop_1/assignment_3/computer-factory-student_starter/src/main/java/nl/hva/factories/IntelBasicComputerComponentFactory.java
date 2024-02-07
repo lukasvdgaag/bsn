@@ -2,7 +2,7 @@ package nl.hva.factories;
 
 import nl.hva.components.*;
 
-public class IntelBasicComputerComponentFactory implements ComputerComponentFactory {
+public class IntelBasicComputerComponentFactory extends AbstractComputerComponentFactory {
 
     @Override
     public ComputerCase selectCase() {
@@ -26,7 +26,7 @@ public class IntelBasicComputerComponentFactory implements ComputerComponentFact
 
     @Override
     public Memory[] selectMemory() {
-        return new Memory[]{new FourGBRam()};
+        return new Memory[]{new FourGBRam(), new FourGBRam()};
     }
 
     @Override
@@ -34,8 +34,4 @@ public class IntelBasicComputerComponentFactory implements ComputerComponentFact
         return null;
     }
 
-    @Override
-    public Storage[] selectStorage(StorageType... type) {
-        return new Storage[]{new HardDrive()};
-    }
 }

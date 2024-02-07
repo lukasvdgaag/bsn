@@ -4,6 +4,6 @@ public class IntelProcessor implements Processor {
 
     @Override
     public String getDetails() {
-        return null;
+        return "Intel Basic Processor";
     }
 }

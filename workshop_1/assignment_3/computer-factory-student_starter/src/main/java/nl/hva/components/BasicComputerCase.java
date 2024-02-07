@@ -4,6 +4,6 @@ public class BasicComputerCase implements ComputerCase {
 
     @Override
     public String getDetails() {
-        return null;
+        return "Basic PC Case";
     }
 }

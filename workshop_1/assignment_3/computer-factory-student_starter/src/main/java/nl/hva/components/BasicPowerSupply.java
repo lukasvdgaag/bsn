@@ -4,6 +4,6 @@ public class BasicPowerSupply implements PowerSupply {
 
     @Override
     public String getDetails() {
-        return null;
+        return "Gaming Power Supply 500 watts";
     }
 }
