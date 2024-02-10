@@ -2,7 +2,7 @@ import nl.hva.aircraft.Aircraft;
 
 public class AircraftDoorDemo {
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Aircraft aircraft = new Aircraft("VC10");
 
         //Normal flight

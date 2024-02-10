@@ -7,7 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/workshop_1/assignment_1/observerexample-student_starter/src/test/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/workshop_1/assignment_3/computer-factory-student_starter/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/workshop_1/assignment_3/state-student_starter/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/workshop_1/assignment_3/state-student_starter/src/test/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/workshop_1/assignment_3/state-student_starter/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/workshop_1/assignment_3/strategy-codec-solution-student_starter/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/workshop_1/assignment_3/strategy-codec-solution-student_starter/src/test/java" isTestSource="false" />
     </content>

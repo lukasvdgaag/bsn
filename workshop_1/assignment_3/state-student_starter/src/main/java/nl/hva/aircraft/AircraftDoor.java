@@ -1,63 +1,77 @@
 package nl.hva.aircraft;
 
-import nl.hva.state.State;
+import nl.hva.state.*;
 
 public class AircraftDoor {
 
-    //TODO add fields as necessary
-
-
     private final String id;
+    private State state;
 
     public AircraftDoor(String id) {
         this.id = id;
-        //TODO initialise fields as necessary
-
+        this.state = new OpenState();
     }
 
-    //TODO implement methods correctly
     public String openDoor() {
-        return null;
+        String message = state.openDoor();
+        if (message.equals(Messages.OPEN_STATE_MESSAGE)) {
+            setState(getOpenState());
+        } else if (message.equals(Messages.SLIDE_DEPLOYED)) {
+            setState(getDeployedState());
+        }
+        return message;
     }
 
     public String closeDoor() {
-        return null;
+        String message = state.closeDoor();
+        if (message.equals(Messages.CLOSED_STATE_MESSAGE)) {
+            setState(getClosedState());
+        }
+        return message;
     }
 
     public String armDoor() {
-        return null;
+        String message = state.armDoor();
+        if (message.equals(Messages.ARMED_STATE_MESSAGE)) {
+            setState(getArmedState());
+        }
+        return message;
     }
 
     public String lockDoor() {
-        return null;
+        String message = state.lockDoor();
+        if (message.equals(Messages.LOCKED_STATE_MESSAGE)) {
+            setState(getLockedState());
+        }
+        return message;
     }
 
     void setState(State state) {
-
+        this.state = state;
     }
 
     public State getState() {
-        return null;
+        return state;
     }
 
     public State getOpenState() {
-        return null;
+        return new OpenState();
     }
 
     public State getClosedState() {
-        return null;
+        return new ClosedState();
     }
 
     public State getLockedState() {
-        return null;
+        return new LockedState();
     }
 
     public State getArmedState() {
-        return null;
+        return new ArmedState();
     }
 
     public State getDeployedState() {
-        return null;
+        return new SlideDeployedState();
     }
 
     public String toString() {

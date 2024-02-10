@@ -1,6 +1,6 @@
 package nl.hva.aircraft;
 
-import nl.hva.state.Messages;
+import nl.hva.state.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
