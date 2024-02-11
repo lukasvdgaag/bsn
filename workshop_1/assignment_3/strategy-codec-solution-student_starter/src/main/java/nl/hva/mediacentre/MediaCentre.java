@@ -18,8 +18,8 @@ public class MediaCentre {
      * Creates a nl.hva.mediacentre.MediaCentre with initially no Codec
      */
     public MediaCentre() {
-
-        //TODO
+        this.codec = null;
+        this.status = NO_DECODER;
     }
 
     /**
@@ -29,10 +29,14 @@ public class MediaCentre {
      *
      * @param codec a Codec
      */
-
     public void setCodec(Codec codec) {
-        //TODO
+        this.codec = codec;
+        if (codec == null) {
+            this.status = NO_DECODER;
+            return;
+        }
 
+        this.status = DECODER_SET + codec.getFileType();
     }
 
     /**
@@ -44,8 +48,11 @@ public class MediaCentre {
      * nl.hva.mediacentre.MediaCentre.INCORRECT_DECODER_FOR_PLAYING
      */
     public String playFile(Recording recording) {
-        //TODO
-        return null;
+        if (codec == null || !codec.getFileType().equals(recording.getFileType())) {
+            return INCORRECT_DECODER_FOR_PLAYING;
+        }
+
+        return codec.decode();
     }
 
     /**
@@ -56,9 +63,10 @@ public class MediaCentre {
      * @return a new Recording with the title and current Codec format
      */
     public Recording recordFile(String title) {
-        //TODO
-        return null;
-
+        if (codec == null) {
+            return null;
+        }
+        return codec.encode(title);
     }
 
     /**
@@ -67,8 +75,7 @@ public class MediaCentre {
      * @return status
      */
     public String getStatus() {
-
-        //TODO
-        return null;
+        return status;
     }
+
 }

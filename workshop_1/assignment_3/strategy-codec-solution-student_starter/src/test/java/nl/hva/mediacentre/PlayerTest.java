@@ -2,8 +2,7 @@ package nl.hva.mediacentre;
 
 
 import nl.hva.Recordings.Recording;
-import nl.hva.codecs.Codec;
-import nl.hva.codecs.FileType;
+import nl.hva.codecs.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
