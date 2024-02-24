@@ -5,6 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.4"
     kotlin("jvm") version "1.9.22"
     kotlin("plugin.spring") version "1.9.22"
+    id("org.sonarqube") version "4.4.1.3373"
 }
 
 group = "nl.hva"
@@ -22,6 +23,14 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "se-specialization-2023-2_tse1_lukas-van-der-gaag_assignments_218091fd-f4d6-475a-b22e-fea1f85e42b1")
+        property("sonar.projectName", "assignments")
+        property("sonar.qualitygate.wait", true)
+    }
 }
 
 tasks.withType<KotlinCompile> {
