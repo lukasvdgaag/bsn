@@ -15,7 +15,7 @@ sonarqube-check:
     paths:
       - .sonar/cache
   script:
-    - cd workshop_1/backend/bsn
+    - cd workshop_2/backend/bsn
     - gradle sonar
   allow_failure: true
   only:
