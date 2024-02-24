@@ -1,8 +1,10 @@
 stages:
-    - sonarqube-check
-    - sonarqube-vulnerability-report
+  - sonarqube-check
+  - sonarqube-vulnerability-report
 
 sonarqube-check:
+  tags:
+    - hva
   stage: sonarqube-check
   image: gradle:8.2.0-jdk17-jammy
   variables:
@@ -21,6 +23,8 @@ sonarqube-check:
     - develop
 
 sonarqube-vulnerability-report:
+  tags:
+    - hva
   stage: sonarqube-vulnerability-report
   script:
     - 'curl -u "${SONAR_TOKEN}:" "${SONAR_HOST_URL}/api/issues/gitlab_sast_export?projectKey=se-specialization-2023-2_tse1_lukas-van-der-gaag_assignments_218091fd-f4d6-475a-b22e-fea1f85e42b1&branch=${CI_COMMIT_BRANCH}&pullRequest=${CI_MERGE_REQUEST_IID}" -o gl-sast-sonar-report.json'
