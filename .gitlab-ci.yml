@@ -16,7 +16,7 @@ sonarqube-check:
       - .sonar/cache
   script:
     - cd workshop_2/backend/bsn
-    - gradle sonar
+    - ./gradlew sonar
   allow_failure: true
   only:
     - merge_requests

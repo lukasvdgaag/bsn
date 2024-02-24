@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/workshop_2/backend/bsn" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
@@ -15,12 +18,12 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/observerexample-student_starter/observerexample-student_starter/pom.xml" />
+        <option value="$PROJECT_DIR$/workshop_1/assignment_1/observerexample-student_starter/pom.xml" />
         <option value="$PROJECT_DIR$/workshop_1/assignment_3/computer-factory-student_starter/pom.xml" />
         <option value="$PROJECT_DIR$/workshop_1/assignment_3/state-student_starter/pom.xml" />
         <option value="$PROJECT_DIR$/workshop_1/assignment_3/strategy-codec-solution-student_starter/pom.xml" />
       </set>
     </option>
-    <option name="workspaceImportForciblyTurnedOn" value="true" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" project-jdk-name="openjdk-21" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
