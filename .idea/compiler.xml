@@ -6,14 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ComputerFactory" />
         <module name="WeatherObserver" />
-        <module name="state" />
-        <module name="strategy" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="ComputerFactory" target="21" />
       <module name="observerexample-student_starter" target="21" />
+      <module name="state" target="21" />
+      <module name="strategy" target="21" />
     </bytecodeTargetLevel>
   </component>
 </project>

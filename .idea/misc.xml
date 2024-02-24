@@ -15,6 +15,9 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/observerexample-student_starter/observerexample-student_starter/pom.xml" />
+        <option value="$PROJECT_DIR$/workshop_1/assignment_3/computer-factory-student_starter/pom.xml" />
+        <option value="$PROJECT_DIR$/workshop_1/assignment_3/state-student_starter/pom.xml" />
+        <option value="$PROJECT_DIR$/workshop_1/assignment_3/strategy-codec-solution-student_starter/pom.xml" />
       </set>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />
