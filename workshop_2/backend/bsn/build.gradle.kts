@@ -37,7 +37,7 @@ sonar {
         property("sonar.plugins.downloadOnlyRequired", true)
         property("sonar.qualitygate.wait", true)
         property("sonar.task.timeout", "600")
-        property("sonar.coverage.jacoco.xmlReportPaths", "${layout.buildDirectory}/reports/jacoco/test/jacocoTestReport.xml")
+        property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml")
     }
 }
 
