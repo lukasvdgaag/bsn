@@ -1,6 +1,5 @@
 package nl.hva.bsn.validators
 
-@FunctionalInterface
 fun interface Validator {
 
     /**
