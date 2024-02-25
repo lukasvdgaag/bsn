@@ -1,5 +1,9 @@
 package nl.hva.bsn
 
+import nl.hva.bsn.validators.BsnValidator
+import nl.hva.bsn.validators.ElevenTestValidator
+import nl.hva.bsn.validators.LengthValidator
+import nl.hva.bsn.validators.NumericValidator
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -34,12 +38,17 @@ class BsnValidationTests {
     @Test
     fun `BSN should pass the 11-test`() {
         val validBsnNineChars = "752311359"
-        val validBsnEightChars = "12345671"
+        val validBsnEightChars = "54321098"
+        val validBsnEightCharsPadded = "054321098"
 
         Assertions.assertTrue(elevenTestValidator.validate(validBsnNineChars), "BSN $validBsnNineChars should be valid")
         Assertions.assertTrue(
             elevenTestValidator.validate(validBsnEightChars),
             "BSN $validBsnEightChars should be valid because it should be padded with a zero"
+        )
+        Assertions.assertTrue(
+            elevenTestValidator.validate(validBsnEightCharsPadded),
+            "BSN $validBsnEightCharsPadded should be valid because it should be padded with a zero"
         )
     }
 
@@ -51,14 +60,14 @@ class BsnValidationTests {
     }
 
     companion object {
-        var elevenTestValidator: BsnValidator = TODO()
-        var lengthValidator: BsnValidator = TODO()
-        var numericValidator: BsnValidator = TODO()
+        lateinit var elevenTestValidator: BsnValidator
+        lateinit var lengthValidator: BsnValidator
+        lateinit var numericValidator: BsnValidator
 
         @JvmStatic
         @BeforeAll
-        fun setUp(): Unit {
-            lengthValidator = LenghtValidator()
+        fun setUp() {
+            lengthValidator = LengthValidator()
             numericValidator = NumericValidator()
             elevenTestValidator = ElevenTestValidator()
         }
