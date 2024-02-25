@@ -13,7 +13,7 @@ package nl.hva.bsn.validators
  */
 class ValidationBuilder {
 
-    private var validator: Validator? = null
+    private var validators: Set<Validator> = mutableSetOf()
 
     /**
      * This method is used to add a new validator to the chain of validators.
@@ -24,11 +24,7 @@ class ValidationBuilder {
      * @return The builder itself, to allow method chaining.
      */
     fun with(validator: Validator): ValidationBuilder {
-        if (this.validator == null) {
-            this.validator = validator
-        } else {
-            this.validator = Validator { bsn -> this.validator!!.validate(bsn) && validator.validate(bsn) }
-        }
+        validators = validators.plus(validator)
         return this
     }
 
@@ -39,7 +35,7 @@ class ValidationBuilder {
      * @return The final BsnValidator.
      */
     fun build(): Validator {
-        return validator ?: Validator { _ -> true }
+        return Validator { bsn -> validators.all { it.validate(bsn) } }
     }
 
 }

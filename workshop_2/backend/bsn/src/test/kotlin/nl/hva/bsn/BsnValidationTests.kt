@@ -1,9 +1,6 @@
 package nl.hva.bsn
 
-import nl.hva.bsn.validators.Validator
-import nl.hva.bsn.validators.ElevenTestValidator
-import nl.hva.bsn.validators.LengthValidator
-import nl.hva.bsn.validators.NumericValidator
+import nl.hva.bsn.validators.*
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -19,6 +16,15 @@ class BsnValidationTests {
 
         Assertions.assertTrue(lengthValidator.validate(eightCharBsn), "BSN $eightCharBsn should be valid")
         Assertions.assertTrue(lengthValidator.validate(nineCharBsn), "BSN $nineCharBsn should be valid")
+    }
+
+    @Test
+    fun `BSN of less than 8 or more than 9 digits should be invalid`() {
+        val sevenCharBsn = "1234567"
+        val tenCharBsn = "1234567890"
+
+        Assertions.assertFalse(lengthValidator.validate(sevenCharBsn), "BSN $sevenCharBsn should be invalid")
+        Assertions.assertFalse(lengthValidator.validate(tenCharBsn), "BSN $tenCharBsn should be invalid")
     }
 
     @Test
@@ -59,10 +65,31 @@ class BsnValidationTests {
         Assertions.assertFalse(elevenTestValidator.validate(invalidBsn), "BSN $invalidBsn should be invalid")
     }
 
+    @Test
+    fun `BSN should be valid`() {
+        val validBsn = "182015737"
+        val validBsn2 = "54321098"
+
+        Assertions.assertTrue(bsnValidator.validate(validBsn), "BSN $validBsn should be valid")
+        Assertions.assertTrue(bsnValidator.validate(validBsn2), "BSN $validBsn2 should be valid")
+    }
+
+    @Test
+    fun `BSN should be invalid`() {
+        val invalidBsn = "12345678"
+        val invalidBsn2 = "1234567890"
+        val invalidBsn3 = "12345678a"
+
+        Assertions.assertFalse(bsnValidator.validate(invalidBsn), "BSN $invalidBsn should be invalid")
+        Assertions.assertFalse(bsnValidator.validate(invalidBsn2), "BSN $invalidBsn2 should be invalid")
+        Assertions.assertFalse(bsnValidator.validate(invalidBsn3), "BSN $invalidBsn3 should be invalid")
+    }
+
     companion object {
         lateinit var elevenTestValidator: Validator
         lateinit var lengthValidator: Validator
         lateinit var numericValidator: Validator
+        lateinit var bsnValidator: Validator
 
         @JvmStatic
         @BeforeAll
@@ -70,6 +97,7 @@ class BsnValidationTests {
             lengthValidator = LengthValidator()
             numericValidator = NumericValidator()
             elevenTestValidator = ElevenTestValidator()
+            bsnValidator = BSNValidator()
         }
     }
 
