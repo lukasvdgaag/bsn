@@ -1,7 +1,7 @@
 package nl.hva.bsn.validators
 
 @FunctionalInterface
-interface BsnValidator {
+fun interface BsnValidator {
 
     /**
      * Validates the given BSN
