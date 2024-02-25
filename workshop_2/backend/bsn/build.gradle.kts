@@ -6,6 +6,7 @@ plugins {
     kotlin("jvm") version "1.9.22"
     kotlin("plugin.spring") version "1.9.22"
     id("org.sonarqube") version "4.4.1.3373"
+    id("jacoco")
 }
 
 group = "nl.hva"
@@ -25,6 +26,10 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
+jacoco {
+    toolVersion = "0.8.8"
+}
+
 sonar {
     properties {
         property("sonar.projectKey", "se-specialization-2023-2_tse1_lukas-van-der-gaag_assignments_218091fd-f4d6-475a-b22e-fea1f85e42b1")
@@ -32,6 +37,7 @@ sonar {
         property("sonar.plugins.downloadOnlyRequired", true)
         property("sonar.qualitygate.wait", true)
         property("sonar.task.timeout", "600")
+        property("sonar.coverage.jacoco.xmlReportPaths", "${layout.buildDirectory}/reports/jacoco/test/jacocoTestReport.xml")
     }
 }
 
@@ -44,4 +50,12 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.named("jacocoTestReport", JacocoReport::class.java) {
+    dependsOn("test")
+    reports {
+        xml.required.set(true)
+    }
 }
