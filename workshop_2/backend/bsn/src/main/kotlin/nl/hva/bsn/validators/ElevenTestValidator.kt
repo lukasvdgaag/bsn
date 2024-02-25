@@ -1,6 +1,6 @@
 package nl.hva.bsn.validators
 
-class ElevenTestValidator : BsnValidator {
+class ElevenTestValidator : Validator {
 
     override fun validate(bsn: String): Boolean {
         val finalBsn = if (bsn.length == 8) "0$bsn" else bsn

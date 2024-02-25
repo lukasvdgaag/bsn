@@ -13,7 +13,7 @@ package nl.hva.bsn.validators
  */
 class ValidationBuilder {
 
-    private var validator: BsnValidator? = null
+    private var validator: Validator? = null
 
     /**
      * This method is used to add a new validator to the chain of validators.
@@ -23,11 +23,11 @@ class ValidationBuilder {
      * @param validator The validator to be added to the chain.
      * @return The builder itself, to allow method chaining.
      */
-    fun with(validator: BsnValidator): ValidationBuilder {
+    fun with(validator: Validator): ValidationBuilder {
         if (this.validator == null) {
             this.validator = validator
         } else {
-            this.validator = BsnValidator { bsn -> this.validator!!.validate(bsn) && validator.validate(bsn) }
+            this.validator = Validator { bsn -> this.validator!!.validate(bsn) && validator.validate(bsn) }
         }
         return this
     }
@@ -38,8 +38,8 @@ class ValidationBuilder {
      *
      * @return The final BsnValidator.
      */
-    fun build(): BsnValidator {
-        return validator ?: BsnValidator { _ -> true }
+    fun build(): Validator {
+        return validator ?: Validator { _ -> true }
     }
 
 }

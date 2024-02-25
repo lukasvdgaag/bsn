@@ -1,6 +1,6 @@
 package nl.hva.bsn
 
-import nl.hva.bsn.validators.BsnValidator
+import nl.hva.bsn.validators.Validator
 import nl.hva.bsn.validators.ElevenTestValidator
 import nl.hva.bsn.validators.LengthValidator
 import nl.hva.bsn.validators.NumericValidator
@@ -60,9 +60,9 @@ class BsnValidationTests {
     }
 
     companion object {
-        lateinit var elevenTestValidator: BsnValidator
-        lateinit var lengthValidator: BsnValidator
-        lateinit var numericValidator: BsnValidator
+        lateinit var elevenTestValidator: Validator
+        lateinit var lengthValidator: Validator
+        lateinit var numericValidator: Validator
 
         @JvmStatic
         @BeforeAll
