@@ -59,6 +59,6 @@ tasks.named("jacocoTestReport", JacocoReport::class.java) {
         xml.required.set(true)
     }
 }
-tasks.named("sonarqube") {
+tasks.named("sonar") {
     dependsOn("jacocoTestReport")
 }
