@@ -21,8 +21,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 @Import(TestConfig::class)
 class BsnControllerTest {
 
-    private var validBsn: String = "54321098"
-    private var invalidBsn: String = "000"
+    private val validBsn: String = "54321098"
+    private val invalidBsn: String = "000"
+    private val bsnValidationEndpoint = "/v1/bsn/validate"
 
     @Autowired
     private lateinit var mockMvc: MockMvc
@@ -40,7 +41,7 @@ class BsnControllerTest {
     @Test
     fun `valid bsn should return 200 OK`() {
         mockMvc.perform(
-            post("/v1/bsn/validate")
+            post(bsnValidationEndpoint)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"bsn\": \"$validBsn\"}")
         ).andExpect(status().isOk)
@@ -50,7 +51,7 @@ class BsnControllerTest {
     @Test
     fun `invalid bsn should throw ApiException`() {
         mockMvc.perform(
-            post("/v1/bsn/validate")
+            post(bsnValidationEndpoint)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"bsn\": \"$invalidBsn\"}")
         ).andExpect { result -> Assertions.assertTrue(result.resolvedException is ApiException) }
@@ -61,13 +62,12 @@ class BsnControllerTest {
     @Test
     fun `invalid body should return 400 Bad Request`() {
         mockMvc.perform(
-            post("/v1/bsn/validate")
+            post(bsnValidationEndpoint)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content("{}")
         ).andExpect(status().isBadRequest)
     }
-
 
 }
 
