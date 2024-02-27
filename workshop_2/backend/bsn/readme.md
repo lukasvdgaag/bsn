@@ -27,7 +27,8 @@ f94d0d4x 2024-02-25     feat: Add BSN validation passing and failing tests
 
 ### 2. Sonarqube
 
-A dated screenshot of the overview of the following  quality gates(https://docs.sonarqube.org/latest/user-guide/quality-gates/): Reliability, Security,Maintainability, Coverage and Duplications. Provide a short discussion of the results.
+A dated screenshot of the overview of the following quality gates(https://docs.sonarqube.org/latest/user-guide/quality-gates/): Reliability,
+Security,Maintainability, Coverage and Duplications. Provide a short discussion of the results.
 
 ![img.png](/docs/sonarqube.png)
 The only really notable thing is that the coverage is at 98% which is above the 80% threshold.  
@@ -37,7 +38,7 @@ Another notable thing is that there are no security, reliability or maintainabil
 
 ### 3. Test Driven Development
 
-Your best test class code snippets with a rationale why the unit tests are “good” tests.  Provide a link to the Test class and the class under test in Git.
+Your best test class code snippets with a rationale why the unit tests are “good” tests. Provide a link to the Test class and the class under test in Git.
 
 ```kt
 @Test
@@ -57,6 +58,14 @@ fun `BSN should pass the 11-test`() {
     )
 }
 ```
+
+The above test is a good test because it tests the `elevenTestValidator` with a valid BSN of 9 characters,
+a valid BSN of 8 characters and the same 8-char BSN with a padded 0.
+This tests the `elevenTestValidator` with different valid BSNs and different valid lengths.  
+For the 8 character BSN, it also tests if the BSN is padded with a 0, which is a requirement of the 11-test for 8 character input.
+
+SOLID principles: The test only tests the `elevenTestValidator`, so it has a single responsibility.  
+The test is also easy to understand and does not have any dependencies on the environment or other classes.
 
 [link-to-your-class-under-test](/src/main/kotlin/nl/hva/bsn/validators/BsnValidator.kt)
 
