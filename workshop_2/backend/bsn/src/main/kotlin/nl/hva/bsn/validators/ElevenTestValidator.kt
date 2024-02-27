@@ -1,5 +1,8 @@
 package nl.hva.bsn.validators
 
+import nl.hva.bsn.constants.ApiError
+import nl.hva.bsn.exceptions.ApiException
+
 /**
  * This class is used to validate a BSN (Burger Service Nummer, a Dutch national identification number).
  * It applies an adaption of the 11-test to the BSN.
@@ -21,6 +24,9 @@ class ElevenTestValidator : Validator {
                 -1 * char.digitToInt()
         }
 
-        return sum % 11 == 0
+        if (sum % 11 != 0) {
+            throw ApiException(ApiError.BSN_FAILED_ELEVEN_TEST)
+        }
+        return true
     }
 }

@@ -1,5 +1,7 @@
 package nl.hva.bsn
 
+import nl.hva.bsn.constants.ApiError
+import nl.hva.bsn.exceptions.ApiException
 import nl.hva.bsn.validators.*
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
@@ -23,8 +25,11 @@ class BsnValidationTests {
         val sevenCharBsn = "1234567"
         val tenCharBsn = "1234567890"
 
-        Assertions.assertFalse(lengthValidator.validate(sevenCharBsn), "BSN $sevenCharBsn should be invalid")
-        Assertions.assertFalse(lengthValidator.validate(tenCharBsn), "BSN $tenCharBsn should be invalid")
+        val exception = Assertions.assertThrows(ApiException::class.java) { lengthValidator.validate(sevenCharBsn) }
+        Assertions.assertEquals(ApiError.BSN_INVALID_LENGTH, exception.error, "BSN $sevenCharBsn should be invalid")
+
+        val exception2 = Assertions.assertThrows(ApiException::class.java) { lengthValidator.validate(tenCharBsn) }
+        Assertions.assertEquals(ApiError.BSN_INVALID_LENGTH, exception2.error, "BSN $tenCharBsn should be invalid")
     }
 
     @Test
@@ -38,7 +43,8 @@ class BsnValidationTests {
     fun `BSN should not be non-numeric`() {
         val nonNumericBsn = "12345678a"
 
-        Assertions.assertFalse(numericValidator.validate(nonNumericBsn), "BSN $nonNumericBsn should be invalid because it contains non-numeric characters")
+        val exception = Assertions.assertThrows(ApiException::class.java) { numericValidator.validate(nonNumericBsn) }
+        Assertions.assertEquals(ApiError.BSN_INVALID_FORMAT, exception.error, "BSN $nonNumericBsn should be invalid because it contains non-numeric characters")
     }
 
     @Test
@@ -62,7 +68,8 @@ class BsnValidationTests {
     fun `Invalid BSN should not pass the 11-test`() {
         val invalidBsn = "123456789"
 
-        Assertions.assertFalse(elevenTestValidator.validate(invalidBsn), "BSN $invalidBsn should be invalid")
+        val exception = Assertions.assertThrows(ApiException::class.java) { elevenTestValidator.validate(invalidBsn) }
+        Assertions.assertEquals(ApiError.BSN_FAILED_ELEVEN_TEST, exception.error, "BSN $invalidBsn should be invalid because it fails the 11-test")
     }
 
     @Test
@@ -80,9 +87,9 @@ class BsnValidationTests {
         val invalidBsn2 = "1234567890"
         val invalidBsn3 = "12345678a"
 
-        Assertions.assertFalse(bsnValidator.validate(invalidBsn), "BSN $invalidBsn should be invalid")
-        Assertions.assertFalse(bsnValidator.validate(invalidBsn2), "BSN $invalidBsn2 should be invalid")
-        Assertions.assertFalse(bsnValidator.validate(invalidBsn3), "BSN $invalidBsn3 should be invalid")
+        Assertions.assertThrows(ApiException::class.java, { bsnValidator.validate(invalidBsn) }, "BSN $invalidBsn should be invalid")
+        Assertions.assertThrows(ApiException::class.java, { bsnValidator.validate(invalidBsn2) }, "BSN $invalidBsn2 should be invalid")
+        Assertions.assertThrows(ApiException::class.java, { bsnValidator.validate(invalidBsn3) }, "BSN $invalidBsn3 should be invalid")
     }
 
     companion object {
@@ -94,10 +101,10 @@ class BsnValidationTests {
         @JvmStatic
         @BeforeAll
         fun setUp() {
-            lengthValidator = LengthValidator(BSNValidator.BSN_MIN_LENGTH, BSNValidator.BSN_MAX_LENGTH)
+            lengthValidator = LengthValidator(BsnValidator.BSN_MIN_LENGTH, BsnValidator.BSN_MAX_LENGTH)
             numericValidator = NumericValidator()
             elevenTestValidator = ElevenTestValidator()
-            bsnValidator = BSNValidator()
+            bsnValidator = BsnValidator()
         }
     }
 
