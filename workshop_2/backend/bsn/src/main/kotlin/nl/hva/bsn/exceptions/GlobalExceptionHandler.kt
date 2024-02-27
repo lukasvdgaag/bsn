@@ -1,7 +1,6 @@
 package nl.hva.bsn.exceptions
 
 import jakarta.servlet.http.HttpServletResponse
-import nl.hva.bsn.constants.ApiError
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity

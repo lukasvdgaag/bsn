@@ -4,10 +4,10 @@ import org.springframework.stereotype.Service
 
 @Service
 class BsnValidator : Validator by ValidationBuilder()
-        .with(LengthValidator(BSN_MIN_LENGTH, BSN_MAX_LENGTH))
-        .with(NumericValidator())
-        .with(ElevenTestValidator())
-        .build() {
+    .with(LengthValidator(BSN_MIN_LENGTH, BSN_MAX_LENGTH))
+    .with(NumericValidator())
+    .with(ElevenTestValidator())
+    .build() {
 
     companion object {
         const val BSN_MIN_LENGTH = 8
