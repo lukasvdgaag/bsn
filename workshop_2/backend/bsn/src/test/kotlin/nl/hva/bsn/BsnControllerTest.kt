@@ -1,5 +1,6 @@
 package nl.hva.bsn
 
+import nl.hva.bsn.configurations.SecurityConfig
 import nl.hva.bsn.exceptions.ApiException
 import nl.hva.bsn.validators.BsnValidator
 import org.junit.jupiter.api.Assertions
@@ -18,7 +19,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPat
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @WebMvcTest
-@Import(TestConfig::class)
+@Import(TestConfig::class, SecurityConfig::class)
 class BsnControllerTest {
 
     private val validBsn: String = "54321098"
