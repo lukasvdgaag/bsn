@@ -16,14 +16,13 @@ class GlobalExceptionHandler {
         ex: ApiException,
         response: HttpServletResponse,
     ): ResponseEntity<ServiceError> {
-        println("Handling ApiException")
         return createResponse(
             status = HttpStatus.valueOf(ex.error.status),
             message = ex.error.message,
         )
     }
 
-    private fun createResponse(
+    fun createResponse(
         message: String,
         status: HttpStatus
     ): ResponseEntity<ServiceError> =

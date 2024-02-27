@@ -101,10 +101,10 @@ class BsnValidationTests {
         @JvmStatic
         @BeforeAll
         fun setUp() {
-            lengthValidator = LengthValidator(BSNValidator.BSN_MIN_LENGTH, BSNValidator.BSN_MAX_LENGTH)
+            lengthValidator = LengthValidator(BsnValidator.BSN_MIN_LENGTH, BsnValidator.BSN_MAX_LENGTH)
             numericValidator = NumericValidator()
             elevenTestValidator = ElevenTestValidator()
-            bsnValidator = BSNValidator()
+            bsnValidator = BsnValidator()
         }
     }
 
