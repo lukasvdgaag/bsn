@@ -4,6 +4,10 @@ stages:
   - deploy_prd
   - sonarqube-check
 
+default:
+  tags:
+    - devmart
+
 variables:
   PROJECT_PATH: workshop_2/backend/bsn
   DOCKER_IMAGE_NAME: hva-bsn
@@ -12,8 +16,6 @@ before_script:
   - docker login $DOCKER_REGISTRY_URL -u "$REGISTRY_USER" -p "$REGISTRY_PASSWORD"
 
 build:
-  tags:
-    - hva
   image: docker:latest
   stage: build
   script:
@@ -21,10 +23,7 @@ build:
     - docker build -t $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME $PROJECT_PATH
     - docker build -t $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:test -t $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:latest $PROJECT_PATH
 
-
 deploy_tst:
-  tags:
-    - hva
   stage: deploy_tst
   image: docker:latest
   script:
@@ -34,8 +33,6 @@ deploy_tst:
     - main # Assuming 'develop' branch is used for testing
 
 deploy_prd:
-  tags:
-    - hva
   stage: deploy_prd
   image: docker:latest
   script:
@@ -47,8 +44,6 @@ deploy_prd:
 
 
 sonarqube-check:
-  tags:
-    - hva
   stage: sonarqube-check
   image: gradle:8.2.0-jdk17-jammy
   variables:
