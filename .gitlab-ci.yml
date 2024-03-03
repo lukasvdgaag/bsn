@@ -8,6 +8,9 @@ variables:
   PROJECT_PATH: workshop_2/backend/bsn
   DOCKER_IMAGE_NAME: hva-bsn
 
+before_script:
+  - echo $REGISTRY_PASSWORD | docker login $DOCKER_REGISTRY_URL -u $REGISTRY_USER --password-stdin
+
 build:
   tags:
     - hva
