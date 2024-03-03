@@ -11,6 +11,7 @@ default:
 variables:
   PROJECT_PATH: workshop_2/backend/bsn
   DOCKER_IMAGE_NAME: hva-bsn
+  DOCKER_HOST: tcp://devmart.net:2375
 
 before_script:
   - echo "Username is $CI_REGISTRY_USER and URL is $DOCKER_REGISTRY_URL"
