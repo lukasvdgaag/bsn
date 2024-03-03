@@ -16,7 +16,8 @@ build:
   script:
     - echo "Building the application..."
     - docker build -t $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME $PROJECT_PATH
-    - docker tag $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:$CI_COMMIT_REF_SLUG
+    - docker build -t $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:test -t $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:latest $PROJECT_PATH
+
 
 deploy_tst:
   tags:
