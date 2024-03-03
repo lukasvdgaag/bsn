@@ -13,6 +13,7 @@ variables:
   DOCKER_IMAGE_NAME: hva-bsn
 
 before_script:
+  - echo "Username is $REGISTRY_USER and URL is $DOCKER_REGISTRY_URL"
   - echo "$REGISTRY_PASSWORD" | docker login --username "$REGISTRY_USER" --password-stdin $DOCKER_REGISTRY_URL
 
 build:
