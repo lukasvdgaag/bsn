@@ -9,6 +9,8 @@ variables:
   DOCKER_IMAGE_NAME: hva-bsn
 
 build:
+  tags:
+    - hva
   stage: build
   script:
     - echo "Building the application..."
@@ -16,6 +18,8 @@ build:
     - docker tag $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:$CI_COMMIT_REF_SLUG
 
 deploy_tst:
+  tags:
+    - hva
   stage: deploy_tst
   script:
     - echo "Deploying to test environment..."
@@ -24,6 +28,8 @@ deploy_tst:
     - main # Assuming 'develop' branch is used for testing
 
 deploy_prd:
+  tags:
+    - hva
   stage: deploy_prd
   script:
     - echo "Deploying to production environment..."
