@@ -1,6 +1,37 @@
 stages:
+  - build
+  - deploy_tst
+  - deploy_prd
   - sonarqube-check
-  - sonarqube-vulnerability-report
+
+variables:
+  PROJECT_PATH: workshop_2/backend/bsn
+  DOCKER_IMAGE_NAME: hva-bsn
+
+build:
+  stage: build
+  script:
+    - echo "Building the application..."
+    - docker build -t $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME .
+    - docker tag $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:$CI_COMMIT_REF_SLUG
+
+deploy_tst:
+  stage: deploy_tst
+  script:
+    - echo "Deploying to test environment..."
+    - docker push $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:test
+  only:
+    - main # Assuming 'develop' branch is used for testing
+
+deploy_prd:
+  stage: deploy_prd
+  script:
+    - echo "Deploying to production environment..."
+    - docker push $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:latest
+  when: manual # Manual trigger for production deployment
+  only:
+    - main # Assuming 'main' branch is for production releases
+
 
 sonarqube-check:
   tags:
@@ -20,6 +51,4 @@ sonarqube-check:
   allow_failure: true
   only:
     - merge_requests
-    - master
     - main
-    - develop
