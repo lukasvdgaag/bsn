@@ -11,6 +11,7 @@ variables:
 build:
   tags:
     - hva
+  image: docker:latest
   stage: build
   script:
     - echo "Building the application..."
@@ -21,6 +22,7 @@ deploy_tst:
   tags:
     - hva
   stage: deploy_tst
+  image: docker:latest
   script:
     - echo "Deploying to test environment..."
     - docker push $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:test
@@ -31,6 +33,7 @@ deploy_prd:
   tags:
     - hva
   stage: deploy_prd
+  image: docker:latest
   script:
     - echo "Deploying to production environment..."
     - docker push $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:latest
