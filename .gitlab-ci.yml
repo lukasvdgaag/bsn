@@ -17,12 +17,10 @@ variables:
   DOCKER_IMAGE_NAME: $CI_REGISTRY_IMAGE/$CI_PROJECT_NAME
   IMAGE_TAG: $CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
   APP_NAME: hva-bsn
-  DOCKER_HOST: tcp://localhost:2375
-  DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
 
 build:
-  image: docker:latest
+  image: docker:19.03.12
   stage: build
   script:
 #    - echo "Building the application..."
@@ -32,7 +30,7 @@ build:
     - docker push $DOCKER_IMAGE_NAME:$IMAGE_TAG
 
 test:
-  image: docker:latest
+  image: docker:19.03.12
   stage: test
   services:
     - docker:19.03.12-dind
@@ -41,7 +39,7 @@ test:
     - docker run $DOCKER_IMAGE_NAME:$IMAGE_TAG ./gradlew test
 
 deploy_tst:
-  image: docker:latest
+  image: docker:19.03.12
   stage: deploy_tst
   script:
     - docker pull $DOCKER_IMAGE_NAME:$IMAGE_TAG
@@ -52,7 +50,7 @@ deploy_tst:
     url: https://$APP_NAME-testing.devmart.net
 
 deploy_prd:
-  image: docker:latest
+  image: docker:19.03.12
   stage: deploy_prd
   script:
     - docker pull $DOCKER_IMAGE_NAME:$IMAGE_TAG
