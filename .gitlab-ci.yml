@@ -38,6 +38,7 @@ test:
 #    - gradle -v
   script:
     - cd $PROJECT_PATH
+    - chmod +x ./gradlew
     - ./gradlew test
 
 deploy_tst:
