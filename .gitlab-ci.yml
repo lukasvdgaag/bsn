@@ -30,7 +30,7 @@ build:
     - docker push $DOCKER_IMAGE_NAME:$IMAGE_TAG
 
 test:
-  image: docker:19.03.12
+  image: gradle:8.2.0-jdk17-jammy
   stage: test
 #  before_script:
 #    - apt-get update && apt-get install -y docker.io
