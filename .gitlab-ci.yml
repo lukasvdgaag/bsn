@@ -19,12 +19,11 @@ variables:
   APP_NAME: hva-bsn
   DOCKER_TLS_CERTDIR: ""
 
-before_script:
-  - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
-
 build:
   image: docker:19.03.12
   stage: build
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
     - docker build -t $DOCKER_IMAGE_NAME:$IMAGE_TAG $PROJECT_PATH
     - docker push $DOCKER_IMAGE_NAME:$IMAGE_TAG
@@ -32,17 +31,15 @@ build:
 test:
   image: gradle:8.2.0-jdk17-jammy
   stage: test
-  before_script:
-    - apt-get update && apt-get install -y docker.io
-    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
     - cd $PROJECT_PATH
-    - chmod +x ./gradlew
-    - ./gradlew test
+    - gradle test
 
 deploy_tst:
   image: docker:19.03.12
   stage: deploy_tst
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
     - docker pull $DOCKER_IMAGE_NAME:$IMAGE_TAG
     - docker stop $APP_NAME-testing && docker rm $APP_NAME-testing || true
@@ -54,6 +51,8 @@ deploy_tst:
 deploy_prd:
   image: docker:19.03.12
   stage: deploy_prd
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
     - docker pull $DOCKER_IMAGE_NAME:$IMAGE_TAG
     - docker stop $APP_NAME-latest && docker rm $APP_NAME-latest || true
