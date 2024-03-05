@@ -32,10 +32,9 @@ build:
 test:
   image: gradle:8.2.0-jdk17-jammy
   stage: test
-#  before_script:
-#    - apt-get update && apt-get install -y docker.io
-#    - docker --version
-#    - gradle -v
+  before_script:
+    - apt-get update && apt-get install -y docker.io
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
     - cd $PROJECT_PATH
     - chmod +x ./gradlew
