@@ -32,13 +32,13 @@ build:
 test:
   image: docker:19.03.12
   stage: test
-  before_script:
-    - apt-get update && apt-get install -y docker.io
-    - docker --version
-    - gradle -v
+#  before_script:
+#    - apt-get update && apt-get install -y docker.io
+#    - docker --version
+#    - gradle -v
   script:
     - cd $PROJECT_PATH
-    - gradle test
+    - ./gradlew test
 
 deploy_tst:
   image: docker:19.03.12
