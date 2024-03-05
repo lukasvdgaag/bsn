@@ -9,12 +9,15 @@ default:
   tags:
     - devmart
 
+services:
+  - docker:dind
+
 variables:
   PROJECT_PATH: workshop_2/backend/bsn
   DOCKER_IMAGE_NAME: $CI_REGISTRY_IMAGE/$CI_PROJECT_NAME
   IMAGE_TAG: $CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
   APP_NAME: hva-bsn
-  DOCKER_HOST: tcp://docker:2375
+  DOCKER_HOST: tcp://localhost:2375
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
 
