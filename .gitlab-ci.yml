@@ -46,7 +46,7 @@ deploy_tst:
   script:
     - docker pull $DOCKER_IMAGE_NAME:$IMAGE_TAG
     - docker stop $APP_NAME-testing && docker rm $APP_NAME-testing || true
-    - docker run -d --name $APP_NAME-testing -p 8080:8091 $DOCKER_IMAGE_NAME:$IMAGE_TAG
+    - docker run -d --name $APP_NAME-testing -p 8091:8080 $DOCKER_IMAGE_NAME:$IMAGE_TAG
   environment:
     name: testing
     url: https://$APP_NAME-testing.devmart.net
@@ -58,7 +58,7 @@ deploy_prd:
     - docker pull $DOCKER_IMAGE_NAME:$IMAGE_TAG
     - docker stop $APP_NAME-latest && docker rm $APP_NAME-latest || true
     - docker tag $DOCKER_IMAGE_NAME:$IMAGE_TAG $DOCKER_IMAGE_NAME:latest
-    - docker run -d --name $APP_NAME-latest -p 8081:8090 $DOCKER_IMAGE_NAME:latest # Reroute container's 8080 port to host's 8090 port
+    - docker run -d --name $APP_NAME-latest -p 8090:8080 $DOCKER_IMAGE_NAME:latest # Reroute container's 8080 port to host's 8090 port
   when: manual # Manual trigger for production deployment
   only:
     - main # Assuming 'main' branch is for production releases
