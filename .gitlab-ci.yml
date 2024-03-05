@@ -26,20 +26,15 @@ build:
   image: docker:19.03.12
   stage: build
   script:
-#    - echo "Building the application..."
-#    - docker build -t $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME $PROJECT_PATH
-#    - docker build -t $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:test -t $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:latest $PROJECT_PATH
     - docker build -t $DOCKER_IMAGE_NAME:$IMAGE_TAG $PROJECT_PATH
     - docker push $DOCKER_IMAGE_NAME:$IMAGE_TAG
 
 test:
-  image: docker:19.03.12
+  image: gradle:8.2.0-jdk17-jammy
   stage: test
-  services:
-    - docker:19.03.12-dind
   script:
-    - docker pull $DOCKER_IMAGE_NAME:$IMAGE_TAG
-    - docker run $DOCKER_IMAGE_NAME:$IMAGE_TAG ./gradlew test
+    - cd $PROJECT_PATH
+    - gradle test
 
 deploy_tst:
   image: docker:19.03.12
@@ -75,7 +70,7 @@ sonarqube-check:
     paths:
       - .sonar/cache
   script:
-    - cd workshop_2/backend/bsn
+    - cd $PROJECT_PATH
     - gradle sonar
   allow_failure: true
   only:
