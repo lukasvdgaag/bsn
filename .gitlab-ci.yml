@@ -5,10 +5,6 @@ stages:
   - deploy_tst
   - deploy_prd
 
-default:
-  tags:
-    - devmart
-
 services:
   - docker:dind
 
@@ -22,6 +18,8 @@ variables:
 build:
   image: docker:19.03.12
   stage: build
+  tags:
+    - hva
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
@@ -31,6 +29,8 @@ build:
 test:
   image: gradle:8.2.0-jdk17-jammy
   stage: test
+  tags:
+    - hva
   script:
     - cd $PROJECT_PATH
     - gradle test
@@ -38,6 +38,8 @@ test:
 deploy_tst:
   image: docker:19.03.12
   stage: deploy_tst
+  tags:
+    - devmart
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
@@ -51,6 +53,8 @@ deploy_tst:
 deploy_prd:
   image: docker:19.03.12
   stage: deploy_prd
+  tags:
+    - devmart
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
@@ -65,6 +69,8 @@ deploy_prd:
 sonarqube-check:
   stage: sonarqube-check
   image: gradle:8.2.0-jdk17-jammy
+  tags:
+    - hva
   variables:
     SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
     GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
