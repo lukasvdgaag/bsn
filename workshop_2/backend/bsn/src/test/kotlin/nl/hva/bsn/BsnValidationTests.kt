@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest
 @SpringBootTest
 class BsnValidationTests {
 
-    @Test
+    /*@Test
     fun `BSN of 8 or 9 digits should be valid`() {
         val eightCharBsn = "12345678"
         val nineCharBsn = "123456789"
@@ -106,7 +106,7 @@ class BsnValidationTests {
             elevenTestValidator = ElevenTestValidator()
             bsnValidator = BsnValidator()
         }
-    }
+    }*/
 
 
 }

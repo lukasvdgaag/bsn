@@ -1,9 +1,9 @@
 stages:
   - build
   - test
+  - sonarqube-check
   - deploy_tst
   - deploy_prd
-  - sonarqube-check
 
 default:
   tags:
@@ -60,7 +60,7 @@ deploy_prd:
     - docker run -d --name $APP_NAME-latest -p 8090:8080 $DOCKER_IMAGE_NAME:latest # Reroute container's 8080 port to host's 8090 port
   when: manual # Manual trigger for production deployment
   only:
-    - main # Assuming 'main' branch is for production releases
+    - main
 
 sonarqube-check:
   stage: sonarqube-check
