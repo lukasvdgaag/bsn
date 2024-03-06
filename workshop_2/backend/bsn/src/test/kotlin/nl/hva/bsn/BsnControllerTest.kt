@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 @Import(TestConfig::class, SecurityConfig::class)
 class BsnControllerTest {
 
-    /*private val validBsn: String = "54321098"
+    private val validBsn: String = "54321098"
     private val invalidBsn: String = "000"
     private val bsnValidationEndpoint = "/v1/bsn/validate"
 
@@ -68,7 +68,7 @@ class BsnControllerTest {
                 .accept(MediaType.APPLICATION_JSON)
                 .content("{}")
         ).andExpect(status().isBadRequest)
-    }*/
+    }
 
 }
 
