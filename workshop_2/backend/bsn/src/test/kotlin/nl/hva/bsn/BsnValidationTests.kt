@@ -16,6 +16,8 @@ class BsnValidationTests {
         val eightCharBsn = "12345678"
         val nineCharBsn = "123456789"
 
+        println("test")
+
         Assertions.assertTrue(lengthValidator.validate(eightCharBsn), "BSN $eightCharBsn should be valid")
         Assertions.assertTrue(lengthValidator.validate(nineCharBsn), "BSN $nineCharBsn should be valid")
     }
