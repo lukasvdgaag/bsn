@@ -19,5 +19,8 @@ COPY --from=builder /home/gradle/src/build/libs/*.jar /app/application.jar
 # Set the working directory
 WORKDIR /app
 
+# Make port 8080 available to the world outside this container
+EXPOSE 8080
+
 # Command to run the application
 CMD ["java", "-jar", "application.jar"]
