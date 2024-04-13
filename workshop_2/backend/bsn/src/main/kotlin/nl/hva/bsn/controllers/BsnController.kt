@@ -19,6 +19,8 @@ class BsnController(
     fun validateBSN(@RequestBody request: BsnValidationRequest): ResponseEntity<ValidationResponse> {
         val isValid = bsnValidator.validate(request.bsn)
 
+        println("BSN: ${request.bsn} is ${if (isValid) "valid" else "invalid"}")
+
         return ResponseEntity.ok(ValidationResponse(isValid))
     }
 
